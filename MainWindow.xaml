@@ -22,19 +22,22 @@
         <Grid Grid.Row="1">
             <TextBlock Text="Логин"
                        Style="{StaticResource TextBlockStyle}"/>
-            <TextBox Style="{StaticResource TextBoxStyle}"/>
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     x:Name="LoginBox"/>
         </Grid>
         
         <Grid Grid.Row="2">
             <TextBlock Text="Пароль"
                        Style="{StaticResource TextBlockStyle}"/>
-            <TextBox Style="{StaticResource TextBoxStyle}"/>
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     x:Name="PasswordBox"/>
         </Grid>
 
         <Grid Grid.Row="3">
             <TextBlock Text="Роль"
                        Style="{StaticResource TextBlockStyle}"/>
-            <ComboBox Style="{StaticResource TextBoxStyle}">
+            <ComboBox x:Name="RoleComboBox"
+                Style="{StaticResource TextBoxStyle}">
                 <ComboBoxItem Content="Администратор"/>
                 <ComboBoxItem Content="Пользователь"/>
             </ComboBox>
