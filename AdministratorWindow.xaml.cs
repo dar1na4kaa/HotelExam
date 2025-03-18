@@ -25,5 +25,20 @@ namespace HotelPairs
             InitializeComponent();
             _login = login; 
         }
+
+        private void AddUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UpdateUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void UnlockUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
