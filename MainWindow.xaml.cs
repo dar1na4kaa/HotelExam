@@ -30,7 +30,27 @@ namespace HotelPairs
 
         private void LogInClick(object sender, RoutedEventArgs e)
         {
+            string loginText = LoginBox.Text;
+            string passwordText = PasswordBox.Text;
 
+            string result = _userService.LogIn(loginText, passwordText);
+            MessageBox.Show(result);
+
+            if (result.Equals("Вы успешно авторизовались!"))
+            {
+                if (!_userService.isNewUser(loginText))
+                {
+                    RechangePasswordWindow rechangePasswordWindow = new  RechangePasswordWindow(loginText);
+                    rechangePasswordWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    AdministratorWindow administrator = new AdministratorWindow(loginText);
+                    administrator.Show();
+                    this.Close();
+                }
+            }
         }
     }
 }

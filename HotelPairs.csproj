@@ -67,6 +67,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AdministratorWindow.xaml.cs">
+      <DependentUpon>AdministratorWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Booking.cs" />
     <Compile Include="Models\BookingService.cs" />
     <Compile Include="Models\CleaningSchedule.cs" />
@@ -80,7 +83,14 @@
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\Type.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="RechangePasswordWindow.xaml.cs">
+      <DependentUpon>RechangePasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\UserService.cs" />
+    <Page Include="AdministratorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,6 +103,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RechangePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

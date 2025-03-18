@@ -20,7 +20,7 @@ namespace HotelPairs.Services
         public string LogIn(string login, string password)
         {
             var user = _context.Users
-                               .FirstOrDefault(u => u.Login == login && VerifyPassword(password,u.PasswordHash));
+                               .FirstOrDefault(u => u.Login == login);
 
             if (user != null)
             {
@@ -29,29 +29,32 @@ namespace HotelPairs.Services
                     return "Вы заблокированы. Обратитесь к администратору.";
                 }
 
-                user.LastLogin = DateTime.Now;
-                user.FailedLoginAttempt = 0;
-                _context.SaveChanges();
+                if (VerifyPassword(password, user.PasswordHash))
+                {
+                    user.FailedLoginAttempt = 0;
+                    _context.SaveChanges();
 
-                return "Вы успешно авторизовались!";
+                    return "Вы успешно авторизовались!";
+                }
+                else
+                {
+                        user.FailedLoginAttempt++;
+                        if (user.FailedLoginAttempt >= 3)
+                        {
+                            user.IsBlocked = true;
+                        }
+                        _context.SaveChanges();
+                    }
+                    return "Вы ввели неверный логин или пароль. Пожалуйста, проверьте ещё раз введенные данные.";
             }
             else
             {
-                var failedUser = _context.Users.FirstOrDefault(u => u.Login == login);
-                if (failedUser != null)
-                {
-                    failedUser.FailedLoginAttempt++;
-                    if (failedUser.FailedLoginAttempt >= 3)
-                    {
-                        failedUser.IsBlocked = true;
-
-
-                    }
-                    _context.SaveChanges();
-                }
-
-                return "Вы ввели неверный логин или пароль. Пожалуйста, проверьте ещё раз введенные данные.";
+                return "Пользователя с таким логиным не существует. Пожалуйста, проверьте ещё раз введенные данные.";
             }
+        }
+        public bool isNewUser(string login)
+        {
+            return _context.Users.First(u => u.Login == login).LastLogin.HasValue;
         }
         private string HashPassword(string inputPassword)
         {
