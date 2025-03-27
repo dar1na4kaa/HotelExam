@@ -8,7 +8,6 @@ namespace HotelPairs.Services
 
     public partial class Payment
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int PaymentID { get; set; }
 
         public int BookingID { get; set; }
@@ -20,11 +19,8 @@ namespace HotelPairs.Services
         [Column(TypeName = "money")]
         public decimal TotalPrice { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string Status { get; set; }
-
-        public DateTime DatePayment { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime? PaymentDate { get; set; }
 
         [Required]
         [StringLength(20)]

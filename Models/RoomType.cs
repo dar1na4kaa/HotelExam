@@ -6,23 +6,20 @@ namespace HotelPairs.Services
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Type
+    public partial class RoomType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Type()
+        public RoomType()
         {
             Rooms = new HashSet<Room>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int TypeID { get; set; }
 
         [Required]
-        [StringLength(150)]
+        [StringLength(255)]
         public string TypeName { get; set; }
-
-        [Column(TypeName = "money")]
-        public decimal Price { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Room> Rooms { get; set; }

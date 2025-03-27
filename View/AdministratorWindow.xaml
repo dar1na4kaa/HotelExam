@@ -1,0 +1,45 @@
+﻿<Window x:Class="HotelPairs.View.AdministratorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Background="DarkBlue"
+        Title="Администрирование" Height="500" Width="600" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Margin="10" HorizontalAlignment="Center">
+            <TextBlock Text="Управление пользователями"
+                       Style="{StaticResource LabelStyle}"
+                       Margin="0 10"/>
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Center"
+                        Margin="0 5">
+                <Button Content="Добавить пользователя" 
+                        Style="{StaticResource ButtonStyle}"
+                        Margin="0 0 10 0"
+                        Click="OpenAddUserWindow_Click"/>
+                <Button Content="Выйти" 
+                        Style="{StaticResource ButtonStyle}" 
+                        Click="CloseWindow_Click"/>
+            </StackPanel>
+
+
+            <ScrollViewer Height="300" 
+                          Margin="10">
+                <ListView x:Name="listViewUsers"  
+                          MouseDoubleClick="OpenEditUserWindow_Click">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="ФИО" 
+                                            DisplayMemberBinding="{Binding LastName}" 
+                                            Width="200"/>
+                            <GridViewColumn Header="Логин" 
+                                            DisplayMemberBinding="{Binding Login}" 
+                                            Width="150"/>
+                            <GridViewColumn Header="Заблокирован" 
+                                            DisplayMemberBinding="{Binding IsBlocked }" 
+                                            Width="160"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+        </StackPanel>
+    </Grid>
+</Window>

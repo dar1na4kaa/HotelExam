@@ -8,12 +8,15 @@ namespace HotelPairs.Services
 
     public partial class User
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int UserID { get; set; }
 
         [Required]
         [StringLength(150)]
         public string Login { get; set; }
+
+        [Required]
+        [StringLength(250)]
+        public string PasswordHash { get; set; }
 
         [Required]
         [StringLength(150)]
@@ -23,17 +26,13 @@ namespace HotelPairs.Services
         [StringLength(150)]
         public string FirstName { get; set; }
 
-        [Required]
-        [StringLength(250)]
-        public string PasswordHash { get; set; }
-
-        public bool IsBlocked { get; set; }
-
-        public DateTime? LastLogin { get; set; }
-
         public int RoleID { get; set; }
 
-        public int FailedLoginAttempt { get; set; }
+        public int? FailedLoginAttempts { get; set; }
+
+        public bool? IsBlocked { get; set; }
+
+        public DateTime? LastLoginAttempt { get; set; }
 
         public virtual Role Role { get; set; }
     }

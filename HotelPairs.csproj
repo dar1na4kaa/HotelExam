@@ -67,31 +67,38 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdministratorWindow.xaml.cs">
+    <Compile Include="View\AdministratorWindow.xaml.cs">
       <DependentUpon>AdministratorWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EditUserWindow.xaml.cs">
+      <DependentUpon>EditUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RechangePasswordWindow.xaml.cs">
+      <DependentUpon>RechangePasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Booking.cs" />
-    <Compile Include="Models\BookingService.cs" />
-    <Compile Include="Models\CleaningSchedule.cs" />
+    <Compile Include="Models\Cleaning_Schedule.cs" />
     <Compile Include="Models\Guest.cs" />
-    <Compile Include="Data\HotelDbContext.cs" />
+    <Compile Include="Data\HotelContext.cs" />
     <Compile Include="Models\Payment.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Room.cs" />
-    <Compile Include="Models\RoomCard.cs" />
-    <Compile Include="Models\Service.cs" />
+    <Compile Include="Models\RoomType.cs" />
     <Compile Include="Models\Staff.cs" />
-    <Compile Include="Models\Type.cs" />
     <Compile Include="Models\User.cs" />
-    <Compile Include="RechangePasswordWindow.xaml.cs">
-      <DependentUpon>RechangePasswordWindow.xaml</DependentUpon>
+    <Compile Include="View\AddNewUserWindow.xaml.cs">
+      <DependentUpon>AddNewUserWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\UserService.cs" />
-    <Page Include="AdministratorWindow.xaml">
+    <Page Include="View\AdministratorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\EditUserWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -99,11 +106,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="RechangePasswordWindow.xaml">
+    <Page Include="View\RechangePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddNewUserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

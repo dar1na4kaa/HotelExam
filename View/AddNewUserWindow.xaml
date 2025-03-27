@@ -1,14 +1,16 @@
-﻿<Window x:Class="HotelPairs.MainWindow"
+﻿<Window x:Class="HotelPairs.View.AddNewUserWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HotelPairs"
+        xmlns:local="clr-namespace:HotelPairs.Services"
         mc:Ignorable="d"
         Background="DarkBlue"
-        Title="Авторизация" Height="450" Width="450" ResizeMode="NoResize">
+        Title="Авторизация" Height="600" Width="500" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -17,23 +19,34 @@
         </Grid.RowDefinitions>
 
         <Grid>
-            <Label Content="Авторизация" Style="{StaticResource LabelStyle}"></Label>
+            <Label Content="Регистрация пользователя" Style="{StaticResource LabelStyle}"></Label>
         </Grid>
         <Grid Grid.Row="1">
+            <TextBlock Text="Фамилия"
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     x:Name="LastNameBox"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <TextBlock Text="Имя"
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     x:Name="NameBox"/>
+        </Grid>
+        <Grid Grid.Row="3">
             <TextBlock Text="Логин"
                        Style="{StaticResource TextBlockStyle}"/>
             <TextBox Style="{StaticResource TextBoxStyle}"
                      x:Name="LoginBox"/>
         </Grid>
-        
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="4">
             <TextBlock Text="Пароль"
                        Style="{StaticResource TextBlockStyle}"/>
             <TextBox Style="{StaticResource TextBoxStyle}"
                      x:Name="PasswordBox"/>
         </Grid>
-
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="5">
             <TextBlock Text="Роль"
                        Style="{StaticResource TextBlockStyle}"/>
             <ComboBox x:Name="RoleComboBox"
@@ -43,10 +56,10 @@
             </ComboBox>
         </Grid>
 
-        <Grid Grid.Row="4">
+        <Grid Grid.Row="6">
             <Button Style="{StaticResource ButtonStyle}"
-                    Content="Войти"
-                    Click="LogInClick"></Button>
+                    Content="Зарегистрировать"
+                    Click="RegInClick"></Button>
         </Grid>
     </Grid>
 </Window>

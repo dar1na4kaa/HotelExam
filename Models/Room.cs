@@ -12,16 +12,18 @@ namespace HotelPairs.Services
         public Room()
         {
             Bookings = new HashSet<Booking>();
-            CleaningSchedules = new HashSet<CleaningSchedule>();
-            RoomCards = new HashSet<RoomCard>();
+            Cleaning_Schedule = new HashSet<Cleaning_Schedule>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int RoomID { get; set; }
 
-        public int Number { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Floor { get; set; }
 
-        public int TypeID { get; set; }
+        public int RoomNumber { get; set; }
+
+        public int TypeId { get; set; }
 
         [Required]
         [StringLength(20)]
@@ -31,11 +33,8 @@ namespace HotelPairs.Services
         public virtual ICollection<Booking> Bookings { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CleaningSchedule> CleaningSchedules { get; set; }
+        public virtual ICollection<Cleaning_Schedule> Cleaning_Schedule { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RoomCard> RoomCards { get; set; }
-
-        public virtual Type Type { get; set; }
+        public virtual RoomType RoomType { get; set; }
     }
 }

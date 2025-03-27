@@ -1,0 +1,57 @@
+﻿<Window x:Class="HotelPairs.View.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotelPairs"
+        mc:Ignorable="d"
+        Background="DarkBlue"
+        Title="Редактирование пользователя" Height="450" Width="500" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Label Content="Редактирование" Style="{StaticResource LabelStyle}"></Label>
+        </Grid>
+        <Grid Grid.Row="1">
+            <TextBlock Text="Логин"
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     x:Name="LoginBox"/>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <TextBlock Text="Фамилия"
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     x:Name="PasswordBox"/>
+        </Grid>
+
+        <Grid Grid.Row="3">
+            <TextBlock Text="Имя"
+                       Style="{StaticResource TextBlockStyle}"/>
+            <TextBox Style="{StaticResource TextBoxStyle}"
+                     x:Name="PassworBox"/>
+        </Grid>
+        
+        <Grid Grid.Row="4">
+            <CheckBox x:Name="CheckBlocked"
+                      Content="Заблокирован"
+                      Style="{StaticResource CheckBoxStyle}"/>
+        </Grid>
+
+        <Grid Grid.Row="5">
+            <Button Style="{StaticResource ButtonStyle}"
+                    Content="Войти"
+                    Click="LogInClick"></Button>
+        </Grid>
+    </Grid>
+
+</Window>

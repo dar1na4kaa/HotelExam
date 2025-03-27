@@ -12,10 +12,9 @@ namespace HotelPairs.Services
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Staff()
         {
-            CleaningSchedules = new HashSet<CleaningSchedule>();
+            Cleaning_Schedule = new HashSet<Cleaning_Schedule>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int StaffID { get; set; }
 
         [Required]
@@ -27,6 +26,6 @@ namespace HotelPairs.Services
         public string FirstName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CleaningSchedule> CleaningSchedules { get; set; }
+        public virtual ICollection<Cleaning_Schedule> Cleaning_Schedule { get; set; }
     }
 }

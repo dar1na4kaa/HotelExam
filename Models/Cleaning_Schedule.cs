@@ -6,23 +6,24 @@ namespace HotelPairs.Services
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CleaningSchedule")]
-    public partial class CleaningSchedule
+    public partial class Cleaning_Schedule
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int CleaningScheduleID { get; set; }
+        public int Cleaning_ScheduleID { get; set; }
 
         public int StaffID { get; set; }
 
         public DateTime CleaningDate { get; set; }
 
-        [Required]
         [StringLength(20)]
-        public string CleanStatus { get; set; }
+        public string StatusClean { get; set; }
 
         public int RoomID { get; set; }
 
-        public string GuestsPreferences { get; set; }
+        public string GuestPreferences { get; set; }
+
+        [Required]
+        [StringLength(20)]
+        public string CleaningStatus { get; set; }
 
         public virtual Room Room { get; set; }
 

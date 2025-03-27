@@ -14,15 +14,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HotelPairs
+namespace HotelPairs.View
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LoginWindow : Window
     {
         private readonly UserService _userService;
-        public MainWindow()
+        public LoginWindow()
         {
             InitializeComponent();
             _userService = new UserService();
@@ -33,12 +33,12 @@ namespace HotelPairs
             string loginText = LoginBox.Text;
             string passwordText = PasswordBox.Text;
 
-            string result = _userService.LogIn(loginText, passwordText);
+            string result = _userService.LogUser(loginText, passwordText);
             MessageBox.Show(result);
 
             if (result.Equals("Вы успешно авторизовались!"))
             {
-                if (!_userService.isNewUser(loginText))
+                if (_userService.isNewUser(loginText))
                 {
                     RechangePasswordWindow rechangePasswordWindow = new  RechangePasswordWindow(loginText);
                     rechangePasswordWindow.Show();

@@ -12,23 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace HotelPairs
+namespace HotelPairs.View
 {
     /// <summary>
-    /// Логика взаимодействия для RechangePasswordWindow.xaml
+    /// Логика взаимодействия для AddNewUserWindow.xaml
     /// </summary>
-    public partial class RechangePasswordWindow : Window
+    public partial class AddNewUserWindow : Window
     {
-        private readonly string _login;
-        public RechangePasswordWindow(string login)
+        public AddNewUserWindow()
         {
             InitializeComponent();
-            _login = login;
         }
 
-        private void ChangePasswordClick(object sender, RoutedEventArgs e)
+        private void RegInClick(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }

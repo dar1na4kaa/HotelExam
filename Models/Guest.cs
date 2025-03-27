@@ -14,7 +14,6 @@ namespace HotelPairs.Services
             Bookings = new HashSet<Booking>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int GuestID { get; set; }
 
         [Required]
@@ -25,19 +24,15 @@ namespace HotelPairs.Services
         [StringLength(150)]
         public string FirstName { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string PhoneNumber { get; set; }
 
-        [Required]
         [StringLength(20)]
         public string DocumentNumber { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Email { get; set; }
 
-        [Required]
         public string Preferences { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
