@@ -35,7 +35,7 @@ namespace HotelPairs.View
             {
                 if (!DataChecker.CheckPassword(NewPasswordBox.Password))
                 {
-                    MessageBox.Show("Неправильный введеный новый пароль. Пароль должен быть больше 4 символов");
+                    MessageBox.Show("Неправильный введеный новый пароль. Пароль должен быть больше 4 символов и меньше 50");
                 }
                 else
                 {
