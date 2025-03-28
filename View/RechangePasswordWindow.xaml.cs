@@ -33,18 +33,25 @@ namespace HotelPairs.View
         {
             if (ConfirmNewPasswordBox.Password.Equals(NewPasswordBox.Password))
             {
-                string oldPasswordText = OldPasswordBox.Text;
-                string newPasswordText = NewPasswordBox.Password;
-
-
-                string result = _userService.ChangePasswordUser(_login, oldPasswordText, newPasswordText);
-                MessageBox.Show(result);
-
-                if (result.Equals("Вы успешно поменяли пароль"))
+                if (!DataChecker.CheckPassword(NewPasswordBox.Password))
                 {
-                    AdministratorWindow administrator = new AdministratorWindow(_login);
-                    administrator.Show();
-                    this.Close();
+                    MessageBox.Show("Неправильный введеный новый пароль. Пароль должен быть больше 4 символов");
+                }
+                else
+                {
+                    string oldPasswordText = OldPasswordBox.Text.Trim();
+                    string newPasswordText = NewPasswordBox.Password.Trim();
+
+
+                    string result = _userService.ChangePasswordUser(_login, oldPasswordText, newPasswordText);
+                    MessageBox.Show(result);
+
+                    if (result.Equals("Вы успешно поменяли пароль"))
+                    {
+                        AdministratorWindow administrator = new AdministratorWindow();
+                        administrator.Show();
+                        this.Close();
+                    }
                 }
             }
             else

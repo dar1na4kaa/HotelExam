@@ -35,5 +35,6 @@ namespace HotelPairs.Services
         public DateTime? LastLoginAttempt { get; set; }
 
         public virtual Role Role { get; set; }
+
     }
 }

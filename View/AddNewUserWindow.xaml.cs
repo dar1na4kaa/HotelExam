@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using HotelPairs.Services;
 
 namespace HotelPairs.View
 {
@@ -19,14 +8,36 @@ namespace HotelPairs.View
     /// </summary>
     public partial class AddNewUserWindow : Window
     {
+        private readonly UserService _userService;
         public AddNewUserWindow()
         {
             InitializeComponent();
+            _userService = new UserService();
         }
 
         private void RegInClick(object sender, RoutedEventArgs e)
         {
-            
+            if (!DataChecker.CheckText(LastNameBox.Text.Trim()) || !DataChecker.CheckText(NameBox.Text.Trim()) ||
+                !DataChecker.CheckLogin(LoginBox.Text.Trim()) || !DataChecker.CheckPassword(PasswordBox.Text.Trim()) ||
+                !DataChecker.CheckText(RoleComboBox.Text.Trim()))
+            {
+                MessageBox.Show("Неправильное заполнение данных. " +
+                                "Ввведите все данные и уберите запрещенные символы." +
+                                "Пароль должен быть больше 4 символов");
+            }
+            else
+            {
+                var result = _userService.RegistrateUser(LoginBox.Text.Trim(),
+                                                         NameBox.Text.Trim(),
+                                                         LoginBox.Text.Trim(),
+                                                         PasswordBox.Text.Trim(),
+                                                         RoleComboBox.Text.Trim());
+                MessageBox.Show(result);
+
+                AdministratorWindow administratorWindow = new AdministratorWindow();
+                administratorWindow.Show();
+                this.Close();
+            }
         }
     }
 }

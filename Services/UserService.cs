@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace HotelPairs.Services
 {
@@ -22,16 +24,49 @@ namespace HotelPairs.Services
                 .Where(b => b.RoleID == 2)
                 .ToList();
         }
+        public User GetUserByLogin(string login)
+        {
+            return _context.Users.FirstOrDefault(b => b.Login.Equals(login));
+        }
+        public User AddUser(string login, string passwordHash, string lastName, string firstName, int roleID)
+        {
+            return new User
+            {
+                Login = login,
+                PasswordHash = passwordHash,
+                LastName = lastName,
+                FirstName = firstName,
+                RoleID = roleID
+            };
+        }
+        public string RegistrateUser(string login, string password, string lastname, string name, string role)
+        {
+            var user = AddUser(login, password, lastname, name, role.Equals("Администратор") ? 1 : 2);
+
+            try
+            {
+                if (GetUserByLogin(login) != null)
+                    return "Пользователь с таким логином уже зарегистрирован";
+
+                _context.Users.Add(user);
+                _context.SaveChanges();
+
+                return $"Пользователь {lastname} {name} успешно зарегистрирован";
+            }
+            catch
+            {
+                return "Произошла ошибка при регистрации пользователя, повторите попытку";
+            }
+        }
         public string LogUser(string login, string password)
         {
-            var user = _context.Users
-                               .FirstOrDefault(u => u.Login == login);
+            var user = GetUserByLogin(login);
 
             if (user == null)
                 return "Пользователя с таким логиным не существует. Пожалуйста, проверьте ещё раз введенные данные.";
 
             if ((bool)user.IsBlocked)
-                return "Вы заблокированы. Обратитесь к администратору.";
+                return "Вы заблокированы.Вы ввели 3 раза неправильный пароль. Обратитесь к администратору.";
 
             if (VerifyPassword(password, user.PasswordHash))
             {
@@ -52,25 +87,53 @@ namespace HotelPairs.Services
             }
             return "Вы ввели неверный пароль. Пожалуйста, проверьте ещё раз введенные данные.";
         }
-        public void UpdateUser(string login,string lastname, string name, bool isBlocked)
+        public string UpdateUserInformation(string oldLogin, string lastname, string name,string newLogin)
         {
-            var existingUser = _context.Users.FirstOrDefault(u => u.Login == login);
+            var existingUser = GetUserByLogin(oldLogin);
 
-            if (existingUser != null)
+            try
             {
+                if (existingUser == null) return "Выбранного пользователя не существует. Пожалуйста, попробуйте снова";
+
+                if (!oldLogin.Equals(newLogin))
+                {
+                    if (GetUserByLogin(newLogin) != null) return "Пользователь с таким логином уже зарегистрирован";
+                }
+
                 existingUser.LastName = lastname;
                 existingUser.FirstName = name;
-                existingUser.Login = login;
-                existingUser.IsBlocked = isBlocked;
-
+                existingUser.Login = newLogin;
                 _context.SaveChanges();
+
+                return "Успешно обновлены данные пользователя";
+            }
+            catch
+            {
+                return "Произошла ошибка при обновлении данных. Пожалуйста, попробуйте снова";
+            }
+        }
+        public string UnbannedUser(string login)
+        {
+            var existingUser = GetUserByLogin(login);
+
+            try
+            {
+                if (existingUser == null) return "Выбранного пользователя не существует. Пожалуйста, попробуйте снова";
+
+                existingUser.IsBlocked = false;
+                existingUser.FailedLoginAttempts = 0;
+                _context.SaveChanges();
+
+                return "Пользователь успешно разблокирован";
+            }
+            catch
+            {
+                return "Произошла ошибка при обновлении данных. Пожалуйста, попробуйте снова";
             }
         }
         public string ChangePasswordUser(string login, string oldPassword, string newPassword)
         {
-            var user = _context.Users
-                               .FirstOrDefault(u => u.Login == login);
-
+            var user = GetUserByLogin(login);
 
             if (VerifyPassword(oldPassword, user.PasswordHash))
             {
@@ -86,7 +149,7 @@ namespace HotelPairs.Services
             }
         }
 
-        public bool isNewUser(string login)
+        public bool IsNewUser(string login)
         {
             return !_context.Users.First(u => u.Login == login).LastLoginAttempt.HasValue;
         }

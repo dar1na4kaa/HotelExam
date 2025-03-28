@@ -20,12 +20,10 @@ namespace HotelPairs.View
     /// </summary>
     public partial class AdministratorWindow : Window
     {
-        private readonly string _login;
         private readonly UserService _userService;
-        public AdministratorWindow(string login)
+        public AdministratorWindow()
         {
             InitializeComponent();
-            _login = login; 
             _userService = new UserService();
 
             LoadUsers();
@@ -40,6 +38,7 @@ namespace HotelPairs.View
         {
             AddNewUserWindow addNewUserWindow = new AddNewUserWindow();
             addNewUserWindow.Show();
+            this.Close();
         }
 
         private void CloseWindow_Click(object sender, RoutedEventArgs e)
@@ -53,7 +52,8 @@ namespace HotelPairs.View
             if (listViewUsers.SelectedItem is User selectedUser)
             {
                 EditUserWindow editWindow = new EditUserWindow(selectedUser.Login);
-                editWindow.ShowDialog();  // Открываем окно редактирования
+                editWindow.Show();
+                this.Close();
             }
         }
 

@@ -30,27 +30,34 @@ namespace HotelPairs.View
 
         private void LogInClick(object sender, RoutedEventArgs e)
         {
-            string loginText = LoginBox.Text;
-            string passwordText = PasswordBox.Text;
-
-            string result = _userService.LogUser(loginText, passwordText);
-            MessageBox.Show(result);
-
-            if (result.Equals("Вы успешно авторизовались!"))
+            if (!DataChecker.CheckLogin(LoginBox.Text.Trim()) || !DataChecker.CheckPassword(PasswordBox.Text))
             {
-                if (_userService.isNewUser(loginText))
-                {
-                    RechangePasswordWindow rechangePasswordWindow = new  RechangePasswordWindow(loginText);
-                    rechangePasswordWindow.Show();
-                    this.Close();
-                }
-                else
-                {
-                    AdministratorWindow administrator = new AdministratorWindow(loginText);
-                    administrator.Show();
-                    this.Close();
-                }
+                MessageBox.Show("Неправильные введеные данные. Ввведите все данные и уберите запрещенные символы");
             }
+            else
+            {
+                string loginText = LoginBox.Text.Trim();
+                string passwordText = PasswordBox.Text.Trim();
+
+                string result = _userService.LogUser(loginText, passwordText);
+                MessageBox.Show(result);
+
+                if (result.Equals("Вы успешно авторизовались!"))
+                {
+                    if (_userService.IsNewUser(loginText))
+                    {
+                        RechangePasswordWindow rechangePasswordWindow = new RechangePasswordWindow(loginText);
+                        rechangePasswordWindow.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        AdministratorWindow administrator = new AdministratorWindow();
+                        administrator.Show();
+                        this.Close();
+                    }
+                }
+            }   
         }
     }
 }
